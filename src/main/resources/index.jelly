@@ -1,0 +1,6 @@
+<!--
+  This view is used to render the installed plugins page.
+-->
+<div>
+  Plugin for Jenkins and Hudson that allows Builds to be reported back into SpiraTest, SpiraPlan or SpiraTeam.
+</div>

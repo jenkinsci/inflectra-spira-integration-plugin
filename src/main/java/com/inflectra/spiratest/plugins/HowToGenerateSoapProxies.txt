@@ -1,0 +1,1 @@
+wsimport -keep -d "C:\Temp\Java" -p com.inflectra.spiratest.plugins.soap http://localhost/Spira/Services/v3_0/ImportExport.svc?WSDL

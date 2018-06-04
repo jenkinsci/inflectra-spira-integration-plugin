@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.regex.Pattern;
+import java.util.Arrays;
 
 import hudson.Extension;
 import hudson.MarkupText;
@@ -65,10 +66,13 @@ public class SpiraRunListener extends RunListener<Run>
 			List<String> logLines = r.getLog(Integer.MAX_VALUE);
 			if (logLines != null && !logLines.isEmpty())
 			{
+				//use StringBuffer for better performance
+                StringBuffer buffer = new StringBuffer();
 				for (String logLine : logLines)
 				{
-					buildDescription += logLine + "\n";
+					buffer.append(logLine + "\n");
 				}
+				buildDescription += buffer.toString();
 			}
 			int buildStatusId = convertStatus(r.getResult());
 			
@@ -126,7 +130,7 @@ public class SpiraRunListener extends RunListener<Run>
 		catch (Exception ex)
 		{
 			//Log the exception
-			listener.getLogger().print(ex.getMessage() + ": " + ex.getStackTrace());
+			listener.getLogger().print(ex.getMessage() + ": " + Arrays.toString(ex.getStackTrace()));
 		}
 	}
 	

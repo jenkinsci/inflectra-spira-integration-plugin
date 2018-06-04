@@ -1,0 +1,2 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<l:dependencies xmlns:l='licenses' groupId='com.inflectra.spiratest.plugins' artifactId='inflectra-spira-integration' version='3.2.2'><l:dependency name='Spira Importer Plugin' groupId='com.inflectra.spiratest.plugins' artifactId='inflectra-spira-integration' version='3.2.2' url='http://www.inflectra.com/SpiraPlan/Integrations/Continuous-Integration-Build-Servers.aspx'><l:description>Plugin for Jenkins that allows Builds to be reported back into SpiraTest, SpiraPlan or SpiraTeam</l:description></l:dependency></l:dependencies>

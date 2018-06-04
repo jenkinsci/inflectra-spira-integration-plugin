@@ -526,10 +526,6 @@ public class SpiraImportExport
 			{
 				soap = soap1;
 			}
-			else
-			{
-				soap1 = soap;
-			}
 			
 			//Get the navigation link for the prefix
 			int artifactTypeId;
@@ -744,16 +740,18 @@ public class SpiraImportExport
 	
 	public String extractStackTrace(StackTraceElement[] elements)
 	{
-		String output = "";
+        //use a StringBuffer for better performance
+        StringBuffer buffer = new StringBuffer();
 		if (elements != null)
 		{
+
 			for (int i = 0; i < elements.length; i++)
 			{
-				output += elements[i].toString();
+				buffer.append(elements[i].toString());
 			}
 		}
 		
-		return output;
+		return buffer.toString();
 	}
 	
 	public static XMLGregorianCalendar convertDatesJava2Xml(Date date)

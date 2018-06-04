@@ -1,0 +1,16 @@
+Manifest-Version: 1.0
+Group-Id: com.inflectra.spiratest.plugins
+Short-Name: inflectra-spira-integration
+Long-Name: Spira Importer Plugin
+Url: http://www.inflectra.com/SpiraPlan/Integrations/Continuous-Integr
+ ation-Build-Servers.aspx
+Plugin-Version: 3.2.2
+Hudson-Version: 2.7.3
+Jenkins-Version: 2.7.3
+Plugin-Developers: 
+Libraries: C:\Users\iwann\Documents\Spira Add Ons\Build Servers\Jenkin
+ s\jenkins-plugin\src\main\resources,C:\Users\iwann\Documents\Spira Ad
+ d Ons\Build Servers\Jenkins\jenkins-plugin\target\classes
+Resource-Path: C:\Users\iwann\Documents\Spira Add Ons\Build Servers\Je
+ nkins\jenkins-plugin\src\main\webapp
+

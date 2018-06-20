@@ -26,14 +26,12 @@
 	<inceptionYear>2012</inceptionYear>
 	<url>http://www.inflectra.com/SpiraPlan/Integrations/Continuous-Integration-Build-Servers.aspx</url>
 	
-    <!-- Assuming you want to host on @jenkinsci:
-    <url>https://wiki.jenkins.io/display/JENKINS/TODO+Plugin</url>
+    <url>https://wiki.jenkins.io/display/JENKINS/Spira+Importer+Plugin</url>
     <scm>
-        <connection>scm:git:git://github.com/jenkinsci/${project.artifactId}-plugin.git</connection>
-        <developerConnection>scm:git:git@github.com:jenkinsci/${project.artifactId}-plugin.git</developerConnection>
-        <url>https://github.com/jenkinsci/${project.artifactId}-plugin</url>
+        <connection>scm:git:git://github.com/jenkinsci/inflectra-spira-integration-plugin.git</connection>
+        <developerConnection>scm:git:git@github.com:jenkinsci/inflectra-spira-integration-plugin.git</developerConnection>
+        <url>https://github.com/jenkinsci/inflectra-spira-integration-plugin</url>
     </scm>
-    -->
 	
 	<!-- get every artifact through maven.glassfish.org, which proxies all the artifacts that we need -->
     <repositories>

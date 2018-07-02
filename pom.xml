@@ -10,7 +10,7 @@
 	
     <groupId>com.inflectra.spiratest.plugins</groupId>
     <artifactId>inflectra-spira-integration</artifactId>
-    <version>3.2.2</version>
+    <version>3.2.2-SNAPSHOT</version>
     <packaging>hpi</packaging>
     <properties>
         <jenkins.version>2.7.3</jenkins.version>
@@ -32,18 +32,6 @@
         <url>https://github.com/jenkinsci/inflectra-spira-integration-plugin</url>
       <tag>inflectra-spira-integration-3.2.2</tag>
   </scm>
-	
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-javadoc-plugin</artifactId>
-				<configuration>
-					<additionalparam>-Xdoclint:none</additionalparam>
-				</configuration>
-			</plugin>
-		</plugins>
-	</build>
 	
 	<!-- get every artifact through maven.glassfish.org, which proxies all the artifacts that we need -->
     <repositories>

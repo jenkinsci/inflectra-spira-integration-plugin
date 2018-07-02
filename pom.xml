@@ -22,10 +22,9 @@
 	<description>Plugin for Jenkins that allows Builds to be reported back into SpiraTest, SpiraPlan or SpiraTeam</description>
 	<organization>
   	<name>Inflectra Corporation</name>
-  	<url>http://www.inflectra.com</url></organization>
-	<inceptionYear>2012</inceptionYear>
-	<url>http://www.inflectra.com/SpiraPlan/Integrations/Continuous-Integration-Build-Servers.aspx</url>
-	
+		<url>http://www.inflectra.com</url>
+	</organization>
+	<inceptionYear>2012</inceptionYear>	
     <url>https://wiki.jenkins.io/display/JENKINS/Spira+Importer+Plugin</url>
     <scm>
         <connection>scm:git:git://github.com/jenkinsci/inflectra-spira-integration-plugin.git</connection>

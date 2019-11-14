@@ -19,6 +19,7 @@ import hudson.model.BuildListener;
 import hudson.model.Descriptor;
 import hudson.tasks.BuildWrapper;
 import hudson.util.FormValidation;
+import hudson.util.Secret;
 
 /**
  * Just used to expose the Spira global and build-specific configuration
@@ -89,7 +90,8 @@ public class SpiraBuilder extends BuildWrapper
          */
         private String url;
         private String username;
-        private String password;
+        //private String password;
+        private Secret password;
 
         public boolean isApplicable(Class<? extends AbstractProject> aClass)
         {
@@ -111,8 +113,12 @@ public class SpiraBuilder extends BuildWrapper
             // To persist global configuration information,
             // set that to properties and call save().
             url = formData.getString("url");
+
             username = formData.getString("username");
-            password = formData.getString("password");
+
+            //Get the given plain text or encrypted text password out of the form
+            password = Secret.fromString(formData.getString("password"));
+
             // ^Can also use req.bindJSON(this, formData);
             //  (easier when there are many fields; need set* methods for this, like setUseFrench)
             save();
@@ -137,11 +143,17 @@ public class SpiraBuilder extends BuildWrapper
 
         /**
          * Returns the Spira Password
+         * It is encrypted in the config file
          */
-        public String getPassword()
+        public Secret getPassword()
         {
             return password;
         }
+
+        public void setPassword(Secret password) {
+            this.password = password;
+        }
+
 
         /**
          * Tests the connection to the SpiraTeam server
@@ -161,7 +173,8 @@ public class SpiraBuilder extends BuildWrapper
 	            	SpiraImportExport spiraClient = new SpiraImportExport();
 	            	spiraClient.setUrl(url);
 	            	spiraClient.setUserName(username);
-	            	spiraClient.setPassword(password);
+                    spiraClient.setPassword(Secret.fromString(password));
+
 	            	boolean success = spiraClient.testConnection();
 	            	if (success)
 	            	{
@@ -196,6 +209,7 @@ public class SpiraBuilder extends BuildWrapper
                 	SpiraImportExport spiraClient = new SpiraImportExport();
                 	spiraClient.setUrl(this.getUrl());
                 	spiraClient.setUserName(this.getUsername());
+                	//SWB Added .getPlainText() to decrypt
                 	spiraClient.setPassword(this.getPassword());
                 	
                 	//Make sure we have a release specified

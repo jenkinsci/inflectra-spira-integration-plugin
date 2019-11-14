@@ -13,6 +13,7 @@ import hudson.model.Hudson;
 import hudson.model.Project;
 import hudson.scm.ChangeLogAnnotator;
 import hudson.scm.ChangeLogSet.Entry;
+import hudson.util.Secret;
 
 /**
  * Extends the changelog annotator to make the changelog include links to Spira
@@ -37,7 +38,9 @@ public class SpiraChangeLogAnnotator extends ChangeLogAnnotator
 		SpiraBuilder spiraBuilder = (SpiraBuilder)project.getBuildWrappers().get(Descriptor.find(SpiraBuilder.class.getName()));
 		String url = spiraBuilder.getDescriptor().getUrl();
 		String username = spiraBuilder.getDescriptor().getUsername();
-		String password = spiraBuilder.getDescriptor().getPassword();
+		//SWB  Pass in decrypted password here
+		//SWB Added .getPlainText() to decrypt
+		String password = spiraBuilder.getDescriptor().getPassword().getPlainText();
 		String projectIdString = spiraBuilder.getProject();
 		try
 		{
@@ -52,7 +55,9 @@ public class SpiraChangeLogAnnotator extends ChangeLogAnnotator
 		SpiraImportExport spiraClient = new SpiraImportExport();
 		spiraClient.setUrl(url);
 		spiraClient.setUserName(username);
-		spiraClient.setPassword(password);
+
+		//SWB  Set correct password here for Secret
+		spiraClient.setPassword(Secret.fromString(password));
 		spiraClient.setProjectId(projectId);
 		
 		//See if we have any Spira tokens

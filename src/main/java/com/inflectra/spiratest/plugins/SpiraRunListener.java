@@ -18,6 +18,7 @@ import hudson.model.Run;
 import hudson.model.TaskListener;
 import hudson.model.listeners.RunListener;
 import hudson.scm.ChangeLogSet;
+import hudson.util.Secret;
 
 /**
  * Implements RunListener to capture build events and send to Spira
@@ -49,7 +50,8 @@ public class SpiraRunListener extends RunListener<Run>
 		}
 		String url = spiraBuilder.getDescriptor().getUrl();
 		String username = spiraBuilder.getDescriptor().getUsername();
-		String password = spiraBuilder.getDescriptor().getPassword();
+		//SWB Added .getPlainText() to decrypt
+		String password = spiraBuilder.getDescriptor().getPassword().getPlainText();
 		String projectIdString = spiraBuilder.getProject();
 		int projectId = Integer.parseInt(projectIdString);
 		String releaseVersionNumber = spiraBuilder.getRelease();
@@ -122,7 +124,7 @@ public class SpiraRunListener extends RunListener<Run>
 			SpiraImportExport spiraClient = new SpiraImportExport();
 			spiraClient.setUrl(url);
 			spiraClient.setUserName(username);
-			spiraClient.setPassword(password);
+			spiraClient.setPassword(Secret.fromString(password));
 			spiraClient.setProjectId(projectId);
 			Date buildDate = r.getTime();
 			spiraClient.recordBuild(releaseVersionNumber, buildDate, buildStatusId, buildName, buildDescription, revisionKeys, incidents);

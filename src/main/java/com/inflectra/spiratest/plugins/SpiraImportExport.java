@@ -27,6 +27,7 @@ import com.inflectra.spiratest.plugins.soap.RemoteBuildSourceCode;
 import com.inflectra.spiratest.plugins.soap.RemoteFilter;
 import com.inflectra.spiratest.plugins.soap.RemoteIncident;
 import com.inflectra.spiratest.plugins.soap.RemoteRelease;
+import hudson.util.Secret;
 
 /**
  * This defines the 'SpiraImportExport' class that provides the Java facade
@@ -46,7 +47,7 @@ public class SpiraImportExport
 	
 	private String url;
 	private String userName;
-	private String password;
+	private Secret password;
 	private int projectId;
 
 	//Artifact type enums
@@ -99,7 +100,7 @@ public class SpiraImportExport
 	{
 	}
 
-	public SpiraImportExport(String url, String userName, String password, int projectId)
+	public SpiraImportExport(String url, String userName, Secret password, int projectId)
 	{
 		this.url = url;
 		this.userName = userName;
@@ -186,13 +187,17 @@ public class SpiraImportExport
 			boolean success = false;
 			try
 			{
-				success = soap.connectionAuthenticate2(this.userName, this.password, SPIRA_PLUG_IN_NAME);
+				//SWB Changed password to type secret, but need to decrypt using .getPlainText()
+				//success = soap.connectionAuthenticate2(this.userName, this.password, SPIRA_PLUG_IN_NAME);
+				success = soap.connectionAuthenticate2(this.userName, this.password.getPlainText(), SPIRA_PLUG_IN_NAME);
 			}
 			catch (Exception ex)
 			{
 				//Try using the second binding
 				soap = soap1;
-				success = soap.connectionAuthenticate2(this.userName, this.password, SPIRA_PLUG_IN_NAME);
+				//SWB Changed password to type secret, but need to decrypt using .getPlainText()
+				//success = soap.connectionAuthenticate2(this.userName, this.password, SPIRA_PLUG_IN_NAME);
+				success = soap.connectionAuthenticate2(this.userName, this.password.getPlainText(), SPIRA_PLUG_IN_NAME);
 			}
 			if (!success)
 			{
@@ -320,13 +325,18 @@ public class SpiraImportExport
 			boolean success = false;
 			try
 			{
-				success = soap.connectionAuthenticate2(this.userName, this.password, SPIRA_PLUG_IN_NAME);
+				//SWB Changed password to type secret, but need to use toString because password could be
+				// either in plain text or encrypted, and toString handles both situations
+				success = soap.connectionAuthenticate2(this.userName, this.password.getPlainText(), SPIRA_PLUG_IN_NAME);
+
 			}
 			catch (Exception ex)
 			{
 				//Try using the second binding
 				soap = soap1;
-				success = soap.connectionAuthenticate2(this.userName, this.password, SPIRA_PLUG_IN_NAME);
+				//SWB Changed password to type secret, but need to use toString because password could be
+				// either in plain text or encrypted, and toString handles both situations
+				success = soap.connectionAuthenticate2(this.userName, this.password.getPlainText(), SPIRA_PLUG_IN_NAME);
 			}
 			return success;
 		}
@@ -412,13 +422,15 @@ public class SpiraImportExport
 			boolean success = false;
 			try
 			{
-				success = soap.connectionAuthenticate2(this.userName, this.password, SPIRA_PLUG_IN_NAME);
+				//SWB Changed password to type secret, but need to decrypt using .getPlainText()
+				success = soap.connectionAuthenticate2(this.userName, this.password.getPlainText(), SPIRA_PLUG_IN_NAME);
 			}
 			catch (Exception ex)
 			{
 				//Try using the second binding
 				soap = soap1;
-				success = soap.connectionAuthenticate2(this.userName, this.password, SPIRA_PLUG_IN_NAME);
+				//SWB Changed password to type secret, but need to decrypt using .getPlainText()
+				success = soap.connectionAuthenticate2(this.userName, this.password.getPlainText(), SPIRA_PLUG_IN_NAME);
 			}
 			
 	        //Connect to the project
@@ -616,13 +628,15 @@ public class SpiraImportExport
 			boolean success = false;
 			try
 			{
-				success = soap.connectionAuthenticate2(this.userName, this.password, SPIRA_PLUG_IN_NAME);
+				//SWB Changed password to type secret, but need to decrypt using .getPlainText()
+				success = soap.connectionAuthenticate2(this.userName, this.password.getPlainText(), SPIRA_PLUG_IN_NAME);
 			}
 			catch (Exception ex)
 			{
 				//Try using the second binding
 				soap = soap1;
-				success = soap.connectionAuthenticate2(this.userName, this.password, SPIRA_PLUG_IN_NAME);
+				//SWB Changed password to type secret, but need to decrypt using .getPlainText()
+				success = soap.connectionAuthenticate2(this.userName, this.password.getPlainText(), SPIRA_PLUG_IN_NAME);
 			}
 			if (!success)
 			{
@@ -853,11 +867,13 @@ public class SpiraImportExport
 		this.userName = userName;
 	}
 
-	public String getPassword() {
+
+	public Secret getPassword() {
 		return password;
 	}
 
-	public void setPassword(String password) {
+	public void setPassword(Secret password) {
+
 		this.password = password;
 	}
 

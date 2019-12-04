@@ -14,13 +14,13 @@
   -->
   <f:section title="Spira Integration"
   	description="The information used to connect the build server to an instance of SpiraTest, SpiraPlan or SpiraTeam.">
-	<f:entry title="Spira URL" help="/plugin/spira-plugin/help-url.html">
+	<f:entry title="Spira URL" help="/plugin/inflectra-spira-integration/help-url.html">
 	  <f:textbox name="url" value="${descriptor.url}" default="http://localhost/SpiraTeam" />
 	</f:entry>
-	<f:entry title="Username" help="/plugin/spira-plugin/help-username.html">
+	<f:entry title="Username" help="/plugin/inflectra-spira-integration/help-username.html">
 	  <f:textbox name="username" value="${descriptor.username}" />
 	</f:entry>
-	<f:entry title="Password" help="/plugin/spira-plugin/help-password.html">
+	<f:entry title="Password" help="/plugin/inflectra-spira-integration/help-password.html">
 	  <f:password name="password" value="${descriptor.password}" />
 	</f:entry>
 	<f:validateButton

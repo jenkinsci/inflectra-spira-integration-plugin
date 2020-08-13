@@ -23,6 +23,9 @@
 	<f:entry title="Password" help="/plugin/inflectra-spira-integration/help-password.html">
 	  <f:password name="password" value="${descriptor.password}" />
 	</f:entry>
+	<f:entry title="Truncate Console Log" help="/plugin/inflectra-spira-integration/help-truncate.html">
+		<f:checkbox name="truncate" checked="${descriptor.truncateConsoleLog}" /> 
+	</f:entry>
 	<f:validateButton
 	   title="Test Connection" progress="Connecting..."
 	   method="testConnection" with="url,username,password" />

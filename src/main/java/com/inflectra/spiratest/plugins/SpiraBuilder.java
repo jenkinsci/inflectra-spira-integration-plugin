@@ -92,6 +92,7 @@ public class SpiraBuilder extends BuildWrapper
         private String username;
         //private String password;
         private Secret password;
+        private boolean truncateConsoleLog;
 
         public boolean isApplicable(Class<? extends AbstractProject> aClass)
         {
@@ -118,6 +119,8 @@ public class SpiraBuilder extends BuildWrapper
 
             //Get the given plain text or encrypted text password out of the form
             password = Secret.fromString(formData.getString("password"));
+
+            truncateConsoleLog = formData.getBoolean("truncate");
 
             // ^Can also use req.bindJSON(this, formData);
             //  (easier when there are many fields; need set* methods for this, like setUseFrench)
@@ -150,6 +153,10 @@ public class SpiraBuilder extends BuildWrapper
             return password;
         }
 
+        public boolean getTruncateConsoleLog(){
+            return truncateConsoleLog;
+        }
+
         public void setPassword(Secret password) {
             this.password = password;
         }
@@ -165,7 +172,7 @@ public class SpiraBuilder extends BuildWrapper
         public FormValidation doTestConnection(
         	    @QueryParameter("url") final String url,
         	    @QueryParameter("username") final String username,
-        	    @QueryParameter("password") final String password)
+                @QueryParameter("password") final String password)
         		throws IOException, ServletException
         {
 	            try
@@ -174,7 +181,6 @@ public class SpiraBuilder extends BuildWrapper
 	            	spiraClient.setUrl(url);
 	            	spiraClient.setUserName(username);
                     spiraClient.setPassword(Secret.fromString(password));
-
 	            	boolean success = spiraClient.testConnection();
 	            	if (success)
 	            	{

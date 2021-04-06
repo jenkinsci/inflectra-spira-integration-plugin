@@ -1,62 +1,60 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+
     <parent>
         <groupId>org.jenkins-ci.plugins</groupId>
         <artifactId>plugin</artifactId>
         <version>3.4</version><!-- which version of Jenkins is this plugin built against? -->
         <relativePath />
     </parent>
-	
+
     <groupId>com.inflectra.spiratest.plugins</groupId>
     <artifactId>inflectra-spira-integration</artifactId>
     <version>3.2.6-SNAPSHOT</version>
     <packaging>hpi</packaging>
-    <properties>
-        <jenkins.version>2.7.3</jenkins.version>
-        <java.level>7</java.level>
-		<additionalparam>-Xdoclint:none</additionalparam> <!-- Prevent Javadoc errors -->
-    </properties>
-	
-	<name>Spira Importer Plugin</name>
-	<description>Plugin for Jenkins that allows Builds to be reported back into SpiraTest, SpiraPlan or SpiraTeam</description>
-	<organization>
+
+    <name>Spira Importer Plugin</name>
+    <description>Plugin for Jenkins that allows Builds to be reported back into SpiraTest, SpiraPlan or SpiraTeam</description>
+    <url>https://wiki.jenkins.io/display/JENKINS/Spira+Importer+Plugin</url>
+    <inceptionYear>2012</inceptionYear>
+    <organization>
   	<name>Inflectra Corporation</name>
 		<url>http://www.inflectra.com</url>
 	</organization>
-	<inceptionYear>2012</inceptionYear>	
-    <url>https://wiki.jenkins.io/display/JENKINS/Spira+Importer+Plugin</url>
+
     <scm>
         <connection>scm:git:git://github.com/jenkinsci/inflectra-spira-integration-plugin.git</connection>
         <developerConnection>scm:git:git@github.com:jenkinsci/inflectra-spira-integration-plugin.git</developerConnection>
         <url>https://github.com/jenkinsci/inflectra-spira-integration-plugin</url>
-      <tag>inflectra-spira-integration-3.2.3</tag>
-  </scm>
-	
-	<!-- get every artifact through maven.glassfish.org, which proxies all the artifacts that we need -->
+        <tag>inflectra-spira-integration-3.2.3</tag>
+    </scm>
+
+    <properties>
+        <jenkins.version>2.7.3</jenkins.version>
+        <java.level>7</java.level>
+        <additionalparam>-Xdoclint:none</additionalparam> <!-- Prevent Javadoc errors -->
+    </properties>
+
+    <!-- get every artifact through maven.glassfish.org, which proxies all the artifacts that we need -->
     <repositories>
         <repository>
             <id>repo.jenkins-ci.org</id>
             <url>https://repo.jenkins-ci.org/public/</url>
         </repository>
-		
 		<repository>
-      <id>m.g.o-public</id>
-      <url>http://maven.glassfish.org/content/groups/public/</url>
-    </repository>
+            <id>m.g.o-public</id>
+            <url>http://maven.glassfish.org/content/groups/public/</url>
+        </repository>
     </repositories>
     <pluginRepositories>
         <pluginRepository>
             <id>repo.jenkins-ci.org</id>
             <url>https://repo.jenkins-ci.org/public/</url>
         </pluginRepository>
-		
-		<pluginRepository>
-      <id>m.g.o-public</id>
-      <url>http://maven.glassfish.org/content/groups/public/</url>
-    </pluginRepository>
+        <pluginRepository>
+            <id>m.g.o-public</id>
+            <url>http://maven.glassfish.org/content/groups/public/</url>
+        </pluginRepository>
     </pluginRepositories>
-	
-
-  
 </project>

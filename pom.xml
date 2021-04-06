@@ -1,62 +1,62 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+
     <parent>
         <groupId>org.jenkins-ci.plugins</groupId>
         <artifactId>plugin</artifactId>
-        <version>3.4</version><!-- which version of Jenkins is this plugin built against? -->
+        <version>4.17</version>
         <relativePath />
     </parent>
-	
+
     <groupId>com.inflectra.spiratest.plugins</groupId>
     <artifactId>inflectra-spira-integration</artifactId>
-    <version>3.2.6-SNAPSHOT</version>
+    <version>${revision}${changelist}</version>
     <packaging>hpi</packaging>
-    <properties>
-        <jenkins.version>2.7.3</jenkins.version>
-        <java.level>7</java.level>
-		<additionalparam>-Xdoclint:none</additionalparam> <!-- Prevent Javadoc errors -->
-    </properties>
-	
-	<name>Spira Importer Plugin</name>
-	<description>Plugin for Jenkins that allows Builds to be reported back into SpiraTest, SpiraPlan or SpiraTeam</description>
-	<organization>
-  	<name>Inflectra Corporation</name>
-		<url>http://www.inflectra.com</url>
-	</organization>
-	<inceptionYear>2012</inceptionYear>	
+
+    <name>Spira Importer Plugin</name>
+    <description>Plugin for Jenkins that allows Builds to be reported back into SpiraTest, SpiraPlan or SpiraTeam</description>
     <url>https://wiki.jenkins.io/display/JENKINS/Spira+Importer+Plugin</url>
+    <inceptionYear>2012</inceptionYear>
+    <organization>
+        <name>Inflectra Corporation</name>
+        <url>http://www.inflectra.com</url>
+    </organization>
+
     <scm>
-        <connection>scm:git:git://github.com/jenkinsci/inflectra-spira-integration-plugin.git</connection>
-        <developerConnection>scm:git:git@github.com:jenkinsci/inflectra-spira-integration-plugin.git</developerConnection>
-        <url>https://github.com/jenkinsci/inflectra-spira-integration-plugin</url>
-      <tag>inflectra-spira-integration-3.2.3</tag>
-  </scm>
-	
-	<!-- get every artifact through maven.glassfish.org, which proxies all the artifacts that we need -->
+        <connection>scm:git:git://github.com/${gitHubRepo}.git</connection>
+        <developerConnection>scm:git:git@github.com:${gitHubRepo}.git</developerConnection>
+        <url>https://github.com/${gitHubRepo}</url>
+        <tag>${scmTag}</tag>
+    </scm>
+
+    <properties>
+        <revision>3.2.6</revision>
+        <changelist>-SNAPSHOT</changelist>
+        <gitHubRepo>jenkinsci/inflectra-spira-integration-plugin</gitHubRepo>
+        <jenkins.version>2.263.3</jenkins.version>
+        <java.level>8</java.level>
+        <additionalparam>-Xdoclint:none</additionalparam>
+    </properties>
+
     <repositories>
         <repository>
             <id>repo.jenkins-ci.org</id>
             <url>https://repo.jenkins-ci.org/public/</url>
         </repository>
-		
-		<repository>
-      <id>m.g.o-public</id>
-      <url>http://maven.glassfish.org/content/groups/public/</url>
-    </repository>
+        <repository>
+            <id>m.g.o-public</id>
+            <url>https://maven.glassfish.org/content/groups/public/</url>
+        </repository>
     </repositories>
     <pluginRepositories>
         <pluginRepository>
             <id>repo.jenkins-ci.org</id>
             <url>https://repo.jenkins-ci.org/public/</url>
         </pluginRepository>
-		
-		<pluginRepository>
-      <id>m.g.o-public</id>
-      <url>http://maven.glassfish.org/content/groups/public/</url>
-    </pluginRepository>
+        <pluginRepository>
+            <id>m.g.o-public</id>
+            <url>https://maven.glassfish.org/content/groups/public/</url>
+        </pluginRepository>
     </pluginRepositories>
-	
-
-  
 </project>

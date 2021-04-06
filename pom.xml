@@ -5,13 +5,13 @@
     <parent>
         <groupId>org.jenkins-ci.plugins</groupId>
         <artifactId>plugin</artifactId>
-        <version>3.4</version><!-- which version of Jenkins is this plugin built against? -->
+        <version>4.17</version>
         <relativePath />
     </parent>
 
     <groupId>com.inflectra.spiratest.plugins</groupId>
     <artifactId>inflectra-spira-integration</artifactId>
-    <version>3.2.6-SNAPSHOT</version>
+    <version>${revision}${changelist}</version>
     <packaging>hpi</packaging>
 
     <name>Spira Importer Plugin</name>
@@ -19,32 +19,34 @@
     <url>https://wiki.jenkins.io/display/JENKINS/Spira+Importer+Plugin</url>
     <inceptionYear>2012</inceptionYear>
     <organization>
-  	<name>Inflectra Corporation</name>
-		<url>http://www.inflectra.com</url>
-	</organization>
+        <name>Inflectra Corporation</name>
+        <url>http://www.inflectra.com</url>
+    </organization>
 
     <scm>
-        <connection>scm:git:git://github.com/jenkinsci/inflectra-spira-integration-plugin.git</connection>
-        <developerConnection>scm:git:git@github.com:jenkinsci/inflectra-spira-integration-plugin.git</developerConnection>
-        <url>https://github.com/jenkinsci/inflectra-spira-integration-plugin</url>
-        <tag>inflectra-spira-integration-3.2.3</tag>
+        <connection>scm:git:git://github.com/${gitHubRepo}.git</connection>
+        <developerConnection>scm:git:git@github.com:${gitHubRepo}.git</developerConnection>
+        <url>https://github.com/${gitHubRepo}</url>
+        <tag>${scmTag}</tag>
     </scm>
 
     <properties>
-        <jenkins.version>2.7.3</jenkins.version>
-        <java.level>7</java.level>
-        <additionalparam>-Xdoclint:none</additionalparam> <!-- Prevent Javadoc errors -->
+        <revision>3.2.6</revision>
+        <changelist>-SNAPSHOT</changelist>
+        <gitHubRepo>jenkinsci/inflectra-spira-integration-plugin</gitHubRepo>
+        <jenkins.version>2.263.3</jenkins.version>
+        <java.level>8</java.level>
+        <additionalparam>-Xdoclint:none</additionalparam>
     </properties>
 
-    <!-- get every artifact through maven.glassfish.org, which proxies all the artifacts that we need -->
     <repositories>
         <repository>
             <id>repo.jenkins-ci.org</id>
             <url>https://repo.jenkins-ci.org/public/</url>
         </repository>
-		<repository>
+        <repository>
             <id>m.g.o-public</id>
-            <url>http://maven.glassfish.org/content/groups/public/</url>
+            <url>https://maven.glassfish.org/content/groups/public/</url>
         </repository>
     </repositories>
     <pluginRepositories>
@@ -54,7 +56,7 @@
         </pluginRepository>
         <pluginRepository>
             <id>m.g.o-public</id>
-            <url>http://maven.glassfish.org/content/groups/public/</url>
+            <url>https://maven.glassfish.org/content/groups/public/</url>
         </pluginRepository>
     </pluginRepositories>
 </project>

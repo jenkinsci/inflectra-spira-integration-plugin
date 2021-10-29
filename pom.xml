@@ -25,7 +25,7 @@
 		<url>http://www.inflectra.com</url>
 	</organization>
 	<inceptionYear>2012</inceptionYear>	
-    <url>https://wiki.jenkins.io/display/JENKINS/Spira+Importer+Plugin</url>
+    <url>https://github.com/jenkinsci/inflectra-spira-integration-plugin</url>
     <scm>
         <connection>scm:git:git://github.com/jenkinsci/inflectra-spira-integration-plugin.git</connection>
         <developerConnection>scm:git:git@github.com:jenkinsci/inflectra-spira-integration-plugin.git</developerConnection>

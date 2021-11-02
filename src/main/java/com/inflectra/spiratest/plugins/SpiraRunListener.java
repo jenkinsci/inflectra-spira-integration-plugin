@@ -22,131 +22,116 @@ import hudson.util.Secret;
 
 /**
  * Implements RunListener to capture build events and send to Spira
+ * 
  * @author Inflectra Corporation
  *
  */
 @Extension
-public class SpiraRunListener extends RunListener<Run>
-{
+public class SpiraRunListener extends RunListener<Run> {
 	/**
 	 * Called when a build is completed
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
-	public void onCompleted(Run r, TaskListener listener)
-	{
+	public void onCompleted(Run r, TaskListener listener) {
 		super.onCompleted(r, listener);
-		
-		//Get the configuration values
-		Project project = (Project)r.getParent();
-		SpiraBuilder spiraBuilder = (SpiraBuilder)project.getBuildWrappers().get(Descriptor.find(SpiraBuilder.DescriptorImpl.class.getName()));
-		if (spiraBuilder == null)
-		{
+
+		// Get the configuration values
+		Project project = (Project) r.getParent();
+		SpiraBuilder spiraBuilder = (SpiraBuilder) project.getBuildWrappers()
+				.get(Descriptor.find(SpiraBuilder.DescriptorImpl.class.getName()));
+		if (spiraBuilder == null) {
 			return;
 		}
-		if (spiraBuilder.getDescriptor() == null)
-		{
+		if (spiraBuilder.getDescriptor() == null) {
 			return;
 		}
 		String url = spiraBuilder.getDescriptor().getUrl();
 		String username = spiraBuilder.getDescriptor().getUsername();
-		//SWB Added .getPlainText() to decrypt
+		// SWB Added .getPlainText() to decrypt
 		String password = spiraBuilder.getDescriptor().getPassword().getPlainText();
 		String projectIdString = spiraBuilder.getProject();
 		int projectId = Integer.parseInt(projectIdString);
 		String releaseVersionNumber = spiraBuilder.getRelease();
-				
-		//Record the build status
-		try
-		{
+
+		// Record the build status
+		try {
 			String buildName = r.getFullDisplayName();
 			String buildDescription = "";
-			if (r.getDescription() != null)
-			{
+			if (r.getDescription() != null) {
 				buildDescription += r.getDescription() + "\n";
 			}
-			List<String> logLines = r.getLog(Integer.MAX_VALUE);
-			if (logLines != null && !logLines.isEmpty())
-			{
-				//use StringBuffer for better performance
-                StringBuffer buffer = new StringBuffer();
-				for (String logLine : logLines)
-				{
-					buffer.append(logLine + "\n");
+			if (!spiraBuilder.getDescriptor().getTruncateConsoleLog()) {
+				List<String> logLines = r.getLog(Integer.MAX_VALUE);
+				if (logLines != null && !logLines.isEmpty()) {
+					// use StringBuffer for better performance
+					StringBuffer buffer = new StringBuffer();
+					for (String logLine : logLines) {
+						buffer.append(logLine + "\n");
+					}
+					buildDescription += buffer.toString();
 				}
-				buildDescription += buffer.toString();
 			}
 			int buildStatusId = convertStatus(r.getResult());
-			
-			//See if we have any revisions or incidents
+
+			// See if we have any revisions or incidents
 			List<String> revisionKeys = new ArrayList<String>();
 			List<Integer> incidents = new ArrayList<Integer>();
-			if (r instanceof AbstractBuild) 
-			{
-				AbstractBuild build = (AbstractBuild)r;
+			if (r instanceof AbstractBuild) {
+				AbstractBuild build = (AbstractBuild) r;
 				ChangeLogSet set = build.getChangeSet();
-				if (set != null)
-				{
-					for(Iterator<ChangeLogSet.Entry> iter = set.iterator(); iter.hasNext();)
-					{
+				if (set != null) {
+					for (Iterator<ChangeLogSet.Entry> iter = set.iterator(); iter.hasNext();) {
 						ChangeLogSet.Entry entry = iter.next();
 						String revisionKey = entry.getCommitId();
 						MarkupText unannotatedMessage = new MarkupText(entry.getMsg());
-						if (revisionKey != null && !revisionKey.isEmpty())
-						{
+						if (revisionKey != null && !revisionKey.isEmpty()) {
 							revisionKeys.add(revisionKey);
 						}
-						
-						//See if we have any Spira incident IN tokens
+
+						// See if we have any Spira incident IN tokens
 						Pattern regex = Pattern.compile("\\[IN:([0-9]+)\\]");
 						List<SubText> tokens = unannotatedMessage.findTokens(regex);
-						for (SubText token : tokens)
-						{
-							if (token.groupCount() > 0)
-							{
-								//Get the incident id
-								try
-								{
+						for (SubText token : tokens) {
+							if (token.groupCount() > 0) {
+								// Get the incident id
+								try {
 									int incidentId = Integer.parseInt(token.group(1));
 									incidents.add(incidentId);
-								}
-								catch (NumberFormatException ex)
-								{
-									//Do Nothing since token invalid
+								} catch (NumberFormatException ex) {
+									// Do Nothing since token invalid
 								}
 							}
 						}
 					}
 				}
 			}
-			
-			//Actually record the build
+
+			// Actually record the build
 			SpiraImportExport spiraClient = new SpiraImportExport();
 			spiraClient.setUrl(url);
 			spiraClient.setUserName(username);
 			spiraClient.setPassword(Secret.fromString(password));
 			spiraClient.setProjectId(projectId);
 			Date buildDate = r.getTime();
-			spiraClient.recordBuild(releaseVersionNumber, buildDate, buildStatusId, buildName, buildDescription, revisionKeys, incidents);
-		}
-		catch (Exception ex)
-		{
-			//Log the exception
+			spiraClient.recordBuild(releaseVersionNumber, buildDate, buildStatusId, buildName, buildDescription,
+					revisionKeys, incidents);
+		} catch (Exception ex) {
+			// Log the exception
 			listener.getLogger().print(ex.getMessage() + ": " + Arrays.toString(ex.getStackTrace()));
 		}
 	}
-	
+
 	/**
 	 * Converts a Jenkins status to a Spira one
+	 * 
 	 * @param result
 	 * @return
 	 */
-	protected int convertStatus(Result result)
-	{
-		int buildStatusId = 1;	//Failed
-		if (result == Result.SUCCESS)
-		{
-			buildStatusId = 2;	//Passed
+	protected int convertStatus(Result result) {
+		int buildStatusId = 1; // Failed
+		if (result == Result.SUCCESS) {
+			buildStatusId = 2; // Passed
 		}
 		return buildStatusId;
 	}

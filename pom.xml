@@ -10,7 +10,7 @@
 	
     <groupId>com.inflectra.spiratest.plugins</groupId>
     <artifactId>inflectra-spira-integration</artifactId>
-    <version>3.2.6-SNAPSHOT</version>
+    <version>3.2.7-SNAPSHOT</version>
     <packaging>hpi</packaging>
     <properties>
         <jenkins.version>2.7.3</jenkins.version>

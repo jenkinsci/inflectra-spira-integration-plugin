@@ -4,10 +4,6 @@ import com.google.gson.*;
 import hudson.util.Secret;
 
 import javax.xml.bind.JAXBElement;
-import javax.xml.datatype.DatatypeConfigurationException;
-import javax.xml.datatype.DatatypeConstants;
-import javax.xml.datatype.DatatypeFactory;
-import javax.xml.datatype.XMLGregorianCalendar;
 import javax.xml.namespace.QName;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -16,6 +12,7 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**
@@ -415,7 +412,7 @@ public class SpiraImportExport {
             body += "\"ReleaseId\": " + releaseId + ",";
             body += "\"Name\": " + cleanApiText(cleanText(name)) + ",";
             body += "\"Description\": " + cleanApiText(cleanText(description)) + ",";
-            body += "\"CreationDate\": \"" + convertDatesJava2Xml(creationDate) + "\"";
+            body += "\"CreationDate\": \"" + convertDatetoUtc(creationDate) + "\"";
 
             if (!associatedRevisions.isEmpty()) {
                 body += ", \"Revisions\": [" + associatedRevisions + "]";
@@ -477,21 +474,16 @@ public class SpiraImportExport {
         return jaxString;
     }
 
-    public static XMLGregorianCalendar convertDatesJava2Xml(Date date) {
+    public static String convertDatetoUtc(Date date) {
         if (date == null) {
             return null;
-        }
-        try {
-            GregorianCalendar calendar = new GregorianCalendar();
-            calendar.setTime(date);
-            DatatypeFactory datatypeFactory = DatatypeFactory.newInstance();
-            XMLGregorianCalendar xmlCal = datatypeFactory.newXMLGregorianCalendar(calendar);
-            //We need to unset the timezone because SpiraTeam is not expected it
-            //and it will break concurrency
-            xmlCal.setTimezone(DatatypeConstants.FIELD_UNDEFINED);
-            return xmlCal;
-        } catch (DatatypeConfigurationException ex) {
-            return null;
+        } else {
+            final String API_DATE_FORMAT = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'";
+            final SimpleDateFormat sdf = new SimpleDateFormat(API_DATE_FORMAT);
+            final TimeZone utc = TimeZone.getTimeZone("UTC");
+            sdf.setTimeZone(utc);
+            String utcDate = sdf.format(date);
+            return utcDate;
         }
     }
 

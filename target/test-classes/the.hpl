@@ -3,7 +3,7 @@ Group-Id: com.inflectra.spiratest.plugins
 Short-Name: inflectra-spira-integration
 Long-Name: Spira Importer Plugin
 Url: https://wiki.jenkins.io/display/JENKINS/Spira+Importer+Plugin
-Plugin-Version: 3.2.7-SNAPSHOT (private-d7ecd165-Administrator)
+Plugin-Version: 3.2.7-SNAPSHOT (private-44921769-Administrator)
 Hudson-Version: 2.7.3
 Jenkins-Version: 2.7.3
 Plugin-Developers: 

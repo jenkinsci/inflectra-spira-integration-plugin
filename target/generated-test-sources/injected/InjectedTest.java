@@ -6,13 +6,13 @@ import java.util.*;
  */
 public class InjectedTest extends junit.framework.TestCase {
   public static junit.framework.Test suite() throws Exception {
-    System.out.println("Running tests for "+"com.inflectra.spiratest.plugins:inflectra-spira-integration:3.2.2");
+    System.out.println("Running tests for "+"com.inflectra.spiratest.plugins:inflectra-spira-integration:3.2.7-SNAPSHOT");
     Map<String, Object> parameters = new HashMap<String, Object>();
-    parameters.put("basedir","C:\\Users\\iwann\\Documents\\Spira Add Ons\\Build Servers\\Jenkins\\jenkins-plugin");
+    parameters.put("basedir","C:\\git\\inflectra-spira-integration-plugin");
     parameters.put("artifactId","inflectra-spira-integration");
     parameters.put("packaging","hpi");
-    parameters.put("outputDirectory","C:\\Users\\iwann\\Documents\\Spira Add Ons\\Build Servers\\Jenkins\\jenkins-plugin\\target\\classes");
-    parameters.put("testOutputDirectory","C:\\Users\\iwann\\Documents\\Spira Add Ons\\Build Servers\\Jenkins\\jenkins-plugin\\target\\test-classes");
+    parameters.put("outputDirectory","C:\\git\\inflectra-spira-integration-plugin\\target\\classes");
+    parameters.put("testOutputDirectory","C:\\git\\inflectra-spira-integration-plugin\\target\\test-classes");
     parameters.put("requirePI","true");
     return org.jvnet.hudson.test.PluginAutomaticTestBuilder.build(parameters);
   }

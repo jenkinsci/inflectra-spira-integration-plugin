@@ -6,7 +6,7 @@
     See global.jelly for a general discussion about jelly script.
   -->
     <f:section title="Spira Configuration">
-		<f:entry title="Project ID" field="project">
+		<f:entry title="Product ID" field="project">
 			<f:textbox />
 		</f:entry>
 		<f:entry title="Release Version Number" field="release">

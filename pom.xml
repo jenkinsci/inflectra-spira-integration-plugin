@@ -12,7 +12,7 @@
 
     <groupId>com.inflectra.spiratest.plugins</groupId>
     <artifactId>inflectra-spira-integration</artifactId>
-    <version>4.0.0</version>
+    <version>3.2.7-SNAPSHOT</version>
 
     <packaging>hpi</packaging>
     <properties>

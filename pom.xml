@@ -12,7 +12,7 @@
 
     <groupId>com.inflectra.spiratest.plugins</groupId>
     <artifactId>inflectra-spira-integration</artifactId>
-    <version>3.2.7</version>
+    <version>3.2.8-SNAPSHOT</version>
 
     <packaging>hpi</packaging>
     <properties>
@@ -37,7 +37,7 @@
         <developerConnection>scm:git:git@github.com:jenkinsci/inflectra-spira-integration-plugin.git
         </developerConnection>
         <url>https://github.com/jenkinsci/inflectra-spira-integration-plugin</url>
-        <tag>inflectra-spira-integration-3.2.7</tag>
+        <tag>4.0.0</tag>
     </scm>
 
     <!-- get every artifact through maven.glassfish.org, which proxies all the artifacts that we need -->

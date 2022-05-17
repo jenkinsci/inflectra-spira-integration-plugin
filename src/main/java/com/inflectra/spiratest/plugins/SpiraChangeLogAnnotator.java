@@ -1,19 +1,17 @@
 package com.inflectra.spiratest.plugins;
 
-import java.util.List;
-import java.util.regex.Pattern;
-
 import hudson.Extension;
 import hudson.MarkupText;
 import hudson.MarkupText.SubText;
 import hudson.model.AbstractBuild;
-import hudson.model.AbstractProject;
 import hudson.model.Descriptor;
-import hudson.model.Hudson;
 import hudson.model.Project;
 import hudson.scm.ChangeLogAnnotator;
 import hudson.scm.ChangeLogSet.Entry;
 import hudson.util.Secret;
+
+import java.util.List;
+import java.util.regex.Pattern;
 
 /**
  * Extends the changelog annotator to make the changelog include links to Spira
@@ -73,7 +71,7 @@ public class SpiraChangeLogAnnotator extends ChangeLogAnnotator
 				{
 					int artifactId = Integer.parseInt(token.group(2));
 					String artifactUrl = spiraClient.createArtifactUrl(prefix, artifactId);
-					String startTag = "<a href=\"" + artifactUrl + "\">";
+					String startTag = "<a href=" + artifactUrl + ">";
 					String endTag = "</a>";
 					token.surroundWith(startTag, endTag);
 				}

@@ -38,27 +38,6 @@
         <jenkins.version>2.263.3</jenkins.version>
         <additionalparam>-Xdoclint:none</additionalparam>
     </properties>
-
-    <repositories>
-        <repository>
-            <id>repo.jenkins-ci.org</id>
-            <url>https://repo.jenkins-ci.org/public/</url>
-        </repository>
-        <repository>
-            <id>m.g.o-public</id>
-            <url>https://maven.glassfish.org/content/groups/public/</url>
-        </repository>
-    </repositories>
-    <pluginRepositories>
-        <pluginRepository>
-            <id>repo.jenkins-ci.org</id>
-            <url>https://repo.jenkins-ci.org/public/</url>
-        </pluginRepository>
-        <pluginRepository>
-            <id>m.g.o-public</id>
-            <url>http://maven.glassfish.org/content/groups/public/</url>
-        </pluginRepository>
-    </pluginRepositories>
     <dependencies>
         <dependency>
             <groupId>com.google.code.gson</groupId>
@@ -76,6 +55,7 @@
             <version>1.8</version>
         </dependency>
     </dependencies>
+
     <build>
         <plugins>
             <plugin>
@@ -109,4 +89,25 @@
             </plugin>
         </plugins>
     </build>
+
+    <repositories>
+        <repository>
+            <id>repo.jenkins-ci.org</id>
+            <url>https://repo.jenkins-ci.org/public/</url>
+        </repository>
+        <repository>
+            <id>m.g.o-public</id>
+            <url>https://maven.glassfish.org/content/groups/public/</url>
+        </repository>
+    </repositories>
+    <pluginRepositories>
+        <pluginRepository>
+            <id>repo.jenkins-ci.org</id>
+            <url>https://repo.jenkins-ci.org/public/</url>
+        </pluginRepository>
+        <pluginRepository>
+            <id>m.g.o-public</id>
+            <url>http://maven.glassfish.org/content/groups/public/</url>
+        </pluginRepository>
+    </pluginRepositories>
 </project>

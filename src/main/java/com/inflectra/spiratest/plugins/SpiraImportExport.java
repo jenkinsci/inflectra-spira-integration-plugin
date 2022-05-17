@@ -292,11 +292,7 @@ public class SpiraImportExport {
      */
     public Integer verifyRelease(String releaseVersionNumber) throws Exception {
         String url = this.url + REST_SERVICE_URL + "projects/" + this.projectId + "/releases?username=" + this.userName + "&api-key=" + this.token.getPlainText();
-
-        Gson gson = new Gson();
-
         String httpResponse;
-
         Integer releaseId = null;
 
         //send the request
@@ -404,8 +400,6 @@ public class SpiraImportExport {
 
             url = this.url + REST_SERVICE_URL + "projects/" + this.projectId + "/releases/" + releaseId + "/builds?username=" + this.userName + "&api-key=" + this.token.getPlainText();
 
-            Gson gson = new Gson();
-
             //create the body of the request
             String body = "{\"BuildStatusId\": \"" + buildStatusId;
             body += "\", \"ProjectId\": \"" + this.projectId + "\",";
@@ -433,7 +427,6 @@ public class SpiraImportExport {
                         try {
                             //Try and retrieve the incident
                             url = this.url + REST_SERVICE_URL + "projects/" + this.projectId + "/incidents/" + incidentId + "?username=" + this.userName + "&api-key=" + this.token.getPlainText();
-                            gson = new Gson();
                             httpResponse = httpGet(url);
                             jsonObject = JsonParser.parseString(httpResponse).getAsJsonObject();
                             jsonObject.remove("FixedBuildId");

@@ -14,6 +14,7 @@ import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * This defines the 'SpiraImportExport' class that provides the Java facade for
@@ -105,7 +106,7 @@ public class SpiraImportExport {
         connection.setRequestProperty("accept", "application/json; charset=utf-8");
         connection.setRequestProperty("Content-Type", "application/json; charset=utf-8");
         OutputStream os = connection.getOutputStream();
-        os.write(body.getBytes());
+        os.write(body.getBytes(StandardCharsets.UTF_8));
         os.flush();
         os.close();
 
@@ -116,7 +117,7 @@ public class SpiraImportExport {
         //getting the response
         if (100 <= responseCode && responseCode <= 399) {
             BufferedReader in = new BufferedReader(new InputStreamReader(
-                    connection.getInputStream()));
+                  connection.getInputStream(), StandardCharsets.UTF_8));
             String inputLine;
             StringBuffer response = new StringBuffer();
 
@@ -181,7 +182,7 @@ public class SpiraImportExport {
 
         if (responseCode == HttpURLConnection.HTTP_OK) { // success
             BufferedReader in = new BufferedReader(new InputStreamReader(
-                    connection.getInputStream()));
+                    connection.getInputStream(), StandardCharsets.UTF_8));
             String inputLine;
             StringBuffer response = new StringBuffer();
 
@@ -292,11 +293,7 @@ public class SpiraImportExport {
      */
     public Integer verifyRelease(String releaseVersionNumber) throws Exception {
         String url = this.url + REST_SERVICE_URL + "projects/" + this.projectId + "/releases?username=" + this.userName + "&api-key=" + this.token.getPlainText();
-
-        Gson gson = new Gson();
-
         String httpResponse;
-
         Integer releaseId = null;
 
         //send the request
@@ -372,10 +369,9 @@ public class SpiraImportExport {
 
             //See if we have any associated revisions
             if (revisions != null && !revisions.isEmpty()) {
-
-                for (String revisionKey : revisions) {
-                    associatedRevisions += "{\"RevisionKey\": \"" + revisionKey + "\"},";
-                }
+                associatedRevisions = revisions.stream()
+                      .map(rev -> "{\"RevisionKey\": " + rev + "\"},")
+                      .collect(Collectors.joining(", "));
             }
             //Now get the release id for the specific version number
             //Get all the active releases
@@ -404,8 +400,6 @@ public class SpiraImportExport {
 
             url = this.url + REST_SERVICE_URL + "projects/" + this.projectId + "/releases/" + releaseId + "/builds?username=" + this.userName + "&api-key=" + this.token.getPlainText();
 
-            Gson gson = new Gson();
-
             //create the body of the request
             String body = "{\"BuildStatusId\": \"" + buildStatusId;
             body += "\", \"ProjectId\": \"" + this.projectId + "\",";
@@ -433,7 +427,6 @@ public class SpiraImportExport {
                         try {
                             //Try and retrieve the incident
                             url = this.url + REST_SERVICE_URL + "projects/" + this.projectId + "/incidents/" + incidentId + "?username=" + this.userName + "&api-key=" + this.token.getPlainText();
-                            gson = new Gson();
                             httpResponse = httpGet(url);
                             jsonObject = JsonParser.parseString(httpResponse).getAsJsonObject();
                             jsonObject.remove("FixedBuildId");

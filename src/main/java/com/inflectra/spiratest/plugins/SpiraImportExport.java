@@ -14,6 +14,7 @@ import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * This defines the 'SpiraImportExport' class that provides the Java facade for
@@ -368,10 +369,9 @@ public class SpiraImportExport {
 
             //See if we have any associated revisions
             if (revisions != null && !revisions.isEmpty()) {
-
-                for (String revisionKey : revisions) {
-                    associatedRevisions += "{\"RevisionKey\": \"" + revisionKey + "\"},";
-                }
+                associatedRevisions = revisions.stream()
+                      .map(rev -> "{\"RevisionKey\": " + rev + "\"},")
+                      .collect(Collectors.joining(", "));
             }
             //Now get the release id for the specific version number
             //Get all the active releases

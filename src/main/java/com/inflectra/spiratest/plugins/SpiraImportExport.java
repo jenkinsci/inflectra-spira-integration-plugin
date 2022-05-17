@@ -105,7 +105,7 @@ public class SpiraImportExport {
         connection.setRequestProperty("accept", "application/json; charset=utf-8");
         connection.setRequestProperty("Content-Type", "application/json; charset=utf-8");
         OutputStream os = connection.getOutputStream();
-        os.write(body.getBytes());
+        os.write(body.getBytes(StandardCharsets.UTF_8));
         os.flush();
         os.close();
 
@@ -116,7 +116,7 @@ public class SpiraImportExport {
         //getting the response
         if (100 <= responseCode && responseCode <= 399) {
             BufferedReader in = new BufferedReader(new InputStreamReader(
-                    connection.getInputStream()));
+                  connection.getInputStream(), StandardCharsets.UTF_8));
             String inputLine;
             StringBuffer response = new StringBuffer();
 
@@ -181,7 +181,7 @@ public class SpiraImportExport {
 
         if (responseCode == HttpURLConnection.HTTP_OK) { // success
             BufferedReader in = new BufferedReader(new InputStreamReader(
-                    connection.getInputStream()));
+                    connection.getInputStream(), StandardCharsets.UTF_8));
             String inputLine;
             StringBuffer response = new StringBuffer();
 

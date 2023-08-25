@@ -1,20 +1,20 @@
 Manifest-Version: 1.0
-Built-By: Administrator
+Built-By: BrunoGruber
 Created-By: Apache Maven
-Build-Jdk: 1.8.0_301
+Build-Jdk: 11.0.12
 Extension-Name: inflectra-spira-integration
 Specification-Title: Plugin for Jenkins that allows Builds to be repor
  ted back into SpiraTest, SpiraPlan or SpiraTeam
 Specification-Vendor: Inflectra Corporation
 Implementation-Vendor: Inflectra Corporation
 Implementation-Title: inflectra-spira-integration
-Implementation-Version: 3.2.7-SNAPSHOT
+Implementation-Version: 4.0.1-SNAPSHOT
 Group-Id: com.inflectra.spiratest.plugins
 Short-Name: inflectra-spira-integration
 Long-Name: Spira Importer Plugin
 Url: https://wiki.jenkins.io/display/JENKINS/Spira+Importer+Plugin
-Plugin-Version: 3.2.7-SNAPSHOT (private-44921769-Administrator)
-Hudson-Version: 2.7.3
-Jenkins-Version: 2.7.3
+Plugin-Version: 4.0.1-SNAPSHOT (private-08/25/2023 13:56-BrunoGruber)
+Hudson-Version: 2.164
+Jenkins-Version: 2.164
 Plugin-Developers: 
 

@@ -28,6 +28,7 @@ public class SpiraImportExport {
      * The URL appended to the base URL to access REST. Note that it ends with a slash
      */
     private static final String REST_SERVICE_URL = "/Services/v6_0/RestService.svc/";
+    private static final String REST_SERVICE_URL_v7 = "/Services/v7_0/RestService.svc/";
     private static final String WEB_SERVICE_NAMESPACE_DATA_OBJECTS = "http://schemas.datacontract.org/2004/07/Inflectra.SpiraTest.Web.Services.v3_0.DataObjects";
 
     private String url;
@@ -428,20 +429,17 @@ public class SpiraImportExport {
                 buildId = jsonObject.get("BuildId").getAsInt();
 
                 //Now we need to set the 'FixedBuildId' for any incidents listed in the commit messages
+                
                 if (incidents != null && !incidents.isEmpty() && buildId != 0) {
+
                     for (Integer incidentId : incidents) {
                         try {
-                            //Try and retrieve the incident
-                            url = this.url + REST_SERVICE_URL + "projects/" + this.projectId + "/incidents/" + incidentId + "?username=" + this.userName + "&api-key=" + this.token.getPlainText();
-                            gson = new Gson();
-                            httpResponse = httpGet(url);
-                            jsonObject = JsonParser.parseString(httpResponse).getAsJsonObject();
-                            jsonObject.remove("FixedBuildId");
-                            jsonObject.addProperty("FixedBuildId", buildId);
-                            //send the updated incident to Spira
+                            //Update the Resolved Build field of the Incident
+                            url = this.url + REST_SERVICE_URL_v7 + "projects/" + this.projectId + "/incidents/" + incidentId  + "/fixed/" +  buildId +"?username=" + this.userName + "&api-key=" + this.token.getPlainText();
+
                             int httpResponseCode = httpPut(url, jsonObject.toString());
                             if (httpResponseCode != 200) {
-                                throw new Exception("Error sending updated Incident to SpiraTest server (response code " + httpResponseCode + ")");
+                                //Just ignore, as not all customers have the V7 API available
                             }
 
                         } catch (Exception exception) {

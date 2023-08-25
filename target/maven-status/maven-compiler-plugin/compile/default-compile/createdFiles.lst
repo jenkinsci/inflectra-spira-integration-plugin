@@ -119,6 +119,7 @@ com\inflectra\spiratest\plugins\soap\IImportExportSystemGetArtifactUrlServiceFau
 com\inflectra\spiratest\plugins\soap\IImportExportTestRunRecordAutomated1ServiceFaultMessageFaultFaultMessage.class
 com\inflectra\spiratest\plugins\soap\IImportExportTestRunRecordAutomated2ServiceFaultMessageFaultFaultMessage.class
 com\inflectra\spiratest\plugins\soap\IImportExportTestRunRecordAutomated3ServiceFaultMessageFaultFaultMessage.class
+META-INF\annotations\hudson.Extension.txt
 com\inflectra\spiratest\plugins\SpiraBuilder\DescriptorImpl\doVerifyRelease.stapler
 com\inflectra\spiratest\plugins\SpiraBuilder$SpiraEnvironment.class
 com\inflectra\spiratest\plugins\soap\SystemGetProductVersion.class

@@ -1,5 +1,5 @@
 Manifest-Version: 1.0
-Built-By: BrunoGruber
+Built-By: sso-simon.bor
 Created-By: Apache Maven
 Build-Jdk: 11.0.12
 Extension-Name: inflectra-spira-integration
@@ -13,7 +13,7 @@ Group-Id: com.inflectra.spiratest.plugins
 Short-Name: inflectra-spira-integration
 Long-Name: Spira Importer Plugin
 Url: https://wiki.jenkins.io/display/JENKINS/Spira+Importer+Plugin
-Plugin-Version: 4.0.1-SNAPSHOT (private-08/25/2023 13:56-BrunoGruber)
+Plugin-Version: 4.0.1-SNAPSHOT (private-f54c3e24-sso-simon.bor)
 Hudson-Version: 2.164
 Jenkins-Version: 2.164
 Plugin-Developers: 

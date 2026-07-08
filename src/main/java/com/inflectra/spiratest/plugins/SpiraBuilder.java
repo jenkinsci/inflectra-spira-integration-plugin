@@ -1,25 +1,18 @@
 package com.inflectra.spiratest.plugins;
 
-import java.io.IOException;
-
-import javax.servlet.ServletException;
-
+import hudson.Extension;
+import hudson.Launcher;
+import hudson.model.*;
+import hudson.tasks.BuildWrapper;
+import hudson.util.FormValidation;
+import hudson.util.Secret;
 import net.sf.json.JSONObject;
-
 import org.kohsuke.stapler.DataBoundConstructor;
 import org.kohsuke.stapler.QueryParameter;
 import org.kohsuke.stapler.StaplerRequest;
 
-import hudson.Extension;
-import hudson.Launcher;
-import hudson.model.AbstractBuild;
-import hudson.model.AbstractProject;
-import hudson.model.Build;
-import hudson.model.BuildListener;
-import hudson.model.Descriptor;
-import hudson.tasks.BuildWrapper;
-import hudson.util.FormValidation;
-import hudson.util.Secret;
+import javax.servlet.ServletException;
+import java.io.IOException;
 
 /**
  * Just used to expose the Spira global and build-specific configuration
@@ -224,16 +217,16 @@ public class SpiraBuilder extends BuildWrapper
                 	Integer releaseId = spiraClient.verifyRelease(release);
                 	if (releaseId == null)
                 	{
-                		return FormValidation.error("A release with the version number '" + release + "' does not exist in the Spira project PR" + projectId);
+                		return FormValidation.error("A release with the version number '" + release + "' does not exist in the Spira product PR" + projectId);
                 	}
                 	else
                 	{
-                		return FormValidation.ok("Successfully Verified Project and Release");
+                		return FormValidation.ok("Successfully Verified Product and Release");
                 	}
                 }
                 catch (NumberFormatException e)
                 {
-                	return FormValidation.error("You need to enter a numeric project ID");            	
+                	return FormValidation.error("You need to enter a numeric product ID");
                 }
                 catch (Exception e)
                 {

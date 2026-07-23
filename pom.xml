@@ -12,10 +12,11 @@
 
     <groupId>com.inflectra.spiratest.plugins</groupId>
     <artifactId>inflectra-spira-integration</artifactId>
-    <version>4.0.2-SNAPSHOT</version>
+    <version>${changelist}</version>
 
     <packaging>hpi</packaging>
     <properties>
+        <changelist>999999-SNAPSHOT</changelist>
         <jenkins.version>2.462.3</jenkins.version>
         <additionalparam>-Xdoclint:none</additionalparam>
         <enforcer.skip>true</enforcer.skip>

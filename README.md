@@ -163,3 +163,43 @@ build succeeds) that you want the test set to be scheduled for:
 
 This means that you don’t need to separately manage your build schedule
 in Jenkins and your test automation schedule in SpiraTest.
+
+
+## Contributing & Releasing
+
+This plugin uses [JEP-229 Continuous Delivery](https://www.jenkins.io/doc/developer/publishing/releasing-cd/) — releases are published automatically when PRs are merged to `master`.
+
+### How releases work
+
+1. You open a PR from a feature/bugfix branch
+2. **You add a label to the PR** (see below)
+3. You merge the PR
+4. [ci.jenkins.io](https://ci.jenkins.io) builds the commit
+5. The CD workflow detects the build passed and an "interesting" PR was merged → publishes a new release automatically
+
+### Required: label your PRs before merging
+
+**A PR will NOT trigger a release unless it has one of these labels:**
+
+| Label | When to use |
+|-------|-------------|
+| `enhancement` or `feature` | New features or improvements |
+| `bug` or `fix` | Bug fixes |
+| `breaking` | Breaking/incompatible changes |
+| `developer` | Internal changes that should still trigger a release (e.g. dependency updates devs need, CI changes) |
+| `deprecated` | Deprecating functionality |
+| `removed` | Removing functionality |
+| `major-enhancement` | Major new features |
+| `major-bug` | Major bug fixes |
+
+Labels that do **not** trigger a release: `documentation`, `chore`, `internal`, `maintenance`, `test`, `dependencies`.
+
+The full label-to-category mapping is defined in the [jenkinsci org release-drafter config](https://github.com/jenkinsci/.github/blob/master/.github/release-drafter.yml).
+
+### If you need to release without merging a new PR
+
+Go to [Actions → cd](https://github.com/jenkinsci/inflectra-spira-integration-plugin/actions/workflows/cd.yml) and click **"Run workflow"** manually. This bypasses the label check.
+
+### Version numbers
+
+Versions are auto-generated in the format `N.vHASH` (e.g. `58.v33212b_f5b_2d1`) where `N` is the git commit depth and `HASH` identifies the commit. There are no manually chosen version numbers.
